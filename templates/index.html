@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>¡Hola Chatbot!</title>
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background: #fff7ed;
+      text-align: center;
+    }
+    .chatbox {
+      width: 60%;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px;
+      border: 2px solid #f59e0b;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #messages {
+      text-align: left;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #fafaf9;
+    }
+    .msg { margin: 8px 0; }
+    .user { color: #1e3a8a; font-weight: 600; }
+    .bot { color: #047857; font-weight: 600; }
+    input, select, button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      margin: 5px;
+      font-size: 15px;
+    }
+    button {
+      background: #047857;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #065f46;
+    }
+    .footer {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #6b7280;
+    }
+    .fact-btn {
+      background: #f59e0b;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .fact-btn:hover {
+      background: #d97706;
+    }
+  </style>
+</head>
+<body>
+  <div class="chatbox">
+    <h1>¡Hola Chatbot! 🌎</h1>
+    <p>Type in English or Spanish. Or click <b>💡 Fact</b> to learn something about Hispanic Heritage Month!</p>
+
+    <div id="messages"></div>
+    
+    <input type="text" id="message" placeholder="Type a message..." size="40" onkeydown="if(event.key === 'Enter') sendMessage()">
+    <select id="lang">
+      <option value="en">English → Spanish</option>
+      <option value="es">Spanish → English</option>
+    </select>
+    <button onclick="sendMessage()">Send</button>
+    <button class="fact-btn" onclick="sendFact()">💡 Fact</button>
+
+    <div class="footer">
+      ✨ Built for ¡Hola Chatbot! Workshop ✨
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage(customMessage = null) {
+      const msgBox = document.getElementById("message");
+      const message = customMessage || msgBox.value;
+      const lang = document.getElementById("lang").value;
+      if (!message) return;
+
+      const messagesDiv = document.getElementById("messages");
+      messagesDiv.innerHTML += `<div class="msg user"><b>You:</b> ${message}</div>`;
+      msgBox.value = "";
+
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message, lang})
+      });
+
+      const data = await res.json();
+      messagesDiv.innerHTML += `<div class="msg bot"><b>Bot:</b> ${data.response}</div>`;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // When user clicks the "Fact" button
+    function sendFact() {
+      sendMessage("fact");
+    }
+  </script>
+</body>
+</html>
