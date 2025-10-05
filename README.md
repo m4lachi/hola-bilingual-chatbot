@@ -79,7 +79,7 @@ Then open your browser and visit 👉 **[http://127.0.0.1:5000](http://127.0.0.1
 
 ## 🧠 About the Workshop
 
-Created for the **Women in Computing Society (WiCS)**’s “¡Hola Chatbot! Build Your Own Bilingual AI” technical workshop.
+Created for the **Women in Computing Society (WiCS)** x **Hispanic Assn. of Computing College Students (HACCs)** “¡Hola Chatbot! Build Your Own Bilingual AI” technical workshop.
 A fun way to celebrate culture, diversity, and the power of AI. 💃
 
 ---
