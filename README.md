@@ -30,3 +30,69 @@ Learn how to build a simple **English ↔ Spanish translation chatbot** using **
 ```bash
 git clone https://github.com/<your-username>/hola-bilingual-chatbot.git
 cd hola-bilingual-chatbot
+````
+
+### 2️⃣ Create a Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # on macOS/Linux
+venv\Scripts\activate      # on Windows
+```
+
+### 3️⃣ Install Dependencies
+
+```bash
+pip install flask transformers sentencepiece
+```
+
+### 4️⃣ Run the App
+
+```bash
+python app.py
+```
+
+Then open your browser and visit 👉 **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
+
+---
+
+## 💬 How to Use
+
+* Type in **English** or **Spanish**
+* Type **`fact`** for a Hispanic Heritage Month fun fact
+* Switch the dropdown to choose the translation direction
+* Watch the magic happen! ✨
+
+---
+
+## 🌟 Example
+
+**Input:**
+
+> fact
+
+**Bot:**
+
+> ¡Ellen Ochoa fue la primera astronauta latina en el espacio en 1993! 🚀
+
+---
+
+## 🧠 About the Workshop
+
+Created for the **Women in Computing Society (WiCS)**’s “¡Hola Chatbot! Build Your Own Bilingual AI” technical workshop.
+A fun way to celebrate culture, diversity, and the power of AI. 💃
+
+---
+
+## 🪅 Credit & Inspiration
+
+* 🤗 [Hugging Face Transformers](https://huggingface.co/transformers/)
+* 🧠 [Helsinki-NLP Models](https://huggingface.co/Helsinki-NLP)
+* ✨ Workshop designed by **Michelle Zambrano**
+
+---
+
+> *“Code with corazón — when technology speaks everyone’s language, the world gets a little smaller.”* ❤️
+
+```
+
