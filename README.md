@@ -43,7 +43,7 @@ venv\Scripts\activate      # on Windows
 ### 3️⃣ Install Dependencies
 
 ```bash
-pip install flask transformers sentencepiece
+pip install flask transformers torch sentencepiece sacremoses
 ```
 
 ### 4️⃣ Run the App
