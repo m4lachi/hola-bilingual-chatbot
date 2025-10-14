@@ -4,11 +4,14 @@ import random
 
 app = Flask(__name__)
 
-# Translation pipelines
+# === 1. Load AI pipelines ===
+# These translation pipelines convert English ↔ Spanish.
+# You can swap models or add more languages later.
 translator_en_to_es = pipeline("translation_en_to_es", model="Helsinki-NLP/opus-mt-en-es")
 translator_es_to_en = pipeline("translation_es_to_en", model="Helsinki-NLP/opus-mt-es-en")
 
-# 🌎 Bilingual Hispanic Heritage facts
+# === 2. Bilingual facts data ===
+# A list of dicts including English + Spanish versions of facts.
 facts = [
     {
         "en": "Did you know? Hispanic Heritage Month runs from Sept 15 to Oct 15!",
@@ -113,26 +116,34 @@ facts = [
     }
 ]
 
+# ----------------------------
+# === 3. Routes ===
 @app.route("/")
 def index():
+    """ Serve the HTML interface"""
     return render_template("index.html")
 
 @app.route("/chat", methods=["POST"])
 def chat():
+    """Receive user message and return translation or fact."""
     data = request.get_json(silent=True) or {}
     user_message = data.get("message", "")
     lang = data.get("lang", "en")
-
+    # Default response
     response = ""
 
     if user_message.lower() == "fact":
+        # Return a random fact in the selected language
         fact = random.choice(facts)
         response = fact["es"] if lang == "es" else fact["en"]
     else:
         # Translate user messages
         if lang == "en":
+            # Translate English → Spanish
+            # result is usually a list of dicts
             response = translator_en_to_es(user_message)[0]["translation_text"]  # type: ignore
         elif lang == "es":
+            # Translate Spanish → English
             response = translator_es_to_en(user_message)[0]["translation_text"]  # type: ignore
         else:
             response = "Sorry, I only support English <-> Spanish."
@@ -141,3 +152,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
