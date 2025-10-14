@@ -92,16 +92,19 @@
       const lang = document.getElementById("lang").value;
       if (!message) return;
 
+      // Show user message
       const messagesDiv = document.getElementById("messages");
       messagesDiv.innerHTML += `<div class="msg user"><b>You:</b> ${message}</div>`;
       msgBox.value = "";
 
+      // Call backend
       const res = await fetch("/chat", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({message, lang})
       });
 
+      //Show bot response
       const data = await res.json();
       messagesDiv.innerHTML += `<div class="msg bot"><b>Bot:</b> ${data.response}</div>`;
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -114,3 +117,4 @@
   </script>
 </body>
 </html>
+
